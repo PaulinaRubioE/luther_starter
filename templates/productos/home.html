@@ -1,0 +1,90 @@
+{% extends 'productos/base.html' %}
+{% load static %}
+{% block title %}Inicio - Catálogo Luther{% endblock %}
+{% block content %}
+
+<!-- 🏷️ CARRUSEL PRINCIPAL -->
+<div id="bannerCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'productos/img/banner1.jpg' %}" class="d-block w-100 rounded shadow-sm" alt="Banner 1">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'productos/img/banner2.jpg' %}" class="d-block w-100 rounded shadow-sm" alt="Banner 2">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'productos/img/banner3.jpg' %}" class="d-block w-100 rounded shadow-sm" alt="Banner 3">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- 🔍 BÚSQUEDA -->
+<form method="GET" action="." class="mb-4">
+  <div class="input-group">
+    <input type="text" name="q" value="{{ query|default:'' }}" class="form-control" placeholder="Buscar producto...">
+    <button class="btn btn-outline-primary" type="submit">Buscar</button>
+  </div>
+</form>
+
+<!-- 🌟 PRODUCTOS DESTACADOS -->
+<h2 class="mb-4 fw-bold text-primary">Lo más destacado</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+  {% for producto in destacados %}
+  <div class="col">
+    <div class="card h-100 shadow-sm border-0">
+      {% if producto.imagenes.all %}
+        <img src="{{ producto.imagenes.all.0.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+      {% else %}
+        <img src="{% static 'productos/img/no-image.png' %}" class="card-img-top" alt="Sin imagen">
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title fw-semibold">{{ producto.nombre }}</h5>
+        {% if producto.precio %}
+          <p class="fw-bold text-primary mb-2">${{ producto.precio }}</p>
+        {% endif %}
+        <p class="card-text">{{ producto.descripcion|truncatechars:15 }}</p>
+        <div class="mt-auto"> <!-- Esto empuja el botón hacia abajo -->
+          <a href="{% url 'detalle_producto' producto.id %}" class="btn btn-primary w-100">Ver detalles</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- 🛍️ CATÁLOGO COMPLETO -->
+<h2 class="mb-4 fw-bold text-primary">Todos los productos</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for producto in productos %}
+  <div class="col">
+    <div class="card h-100 shadow-sm border-0">
+      {% if producto.imagenes.all %}
+        <img src="{{ producto.imagenes.all.0.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+      {% else %}
+        <img src="{% static 'productos/img/no-image.png' %}" class="card-img-top" alt="Sin imagen">
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title fw-semibold">{{ producto.nombre }}</h5>
+        {% if producto.categoria %}
+          <p class="text-muted mb-1"><small>{{ producto.categoria }}</small></p>
+        {% endif %}
+        {% if producto.precio %}
+          <p class="fw-bold text-primary mb-2">${{ producto.precio }}</p>
+        {% endif %}
+        <p class="card-text">{{ producto.descripcion|truncatechars:90 }}</p>
+        <a href="{% url 'detalle_producto' producto.id %}" class="btn btn-outline-primary w-100">Ver más</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p class="text-center text-muted">No hay productos registrados.</p>
+  {% endfor %}
+</div>
+
+{% endblock %}
