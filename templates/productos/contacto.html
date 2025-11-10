@@ -1,0 +1,36 @@
+{% extends 'productos/base.html' %}
+{% load static %}
+{% block title %}Contacto - Luther{% endblock %}
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title mb-4">Contáctanos</h3>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="mb-3 row">
+            <div class="col">
+              <label class="form-label">Nombre</label>
+              <input type="text" name="nombre" class="form-control" required>
+            </div>
+            <div class="col">
+              <label class="form-label">Correo</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Mensaje</label>
+            <textarea name="mensaje" rows="5" class="form-control" required></textarea>
+          </div>
+          <div class="text-end">
+            <button class="btn btn-primary" type="submit">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

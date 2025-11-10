@@ -1,48 +1,26 @@
 body {
-    background-color: #f7f8fa;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px #224d1a20;
-  }
-  
-  h1 {
-    color: #224d1a20;
-  }
-  .carousel-caption h5 {
-    font-size: 1.5rem;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .carousel img {
-    border-radius: 10px;
-  }
-  
-  .card {
-    border-radius: 1rem;
-    transition: transform 0.3s ease;
-  }
-  
-  .card:hover {
-    transform: scale(1.02);
-  }
-  .card-img-top {
-    height: 220px;          /* altura fija para todas las imágenes */
-    object-fit: cover;      /* recorta la imagen sin distorsionarla */
-    width: 100%;            /* asegura que ocupe todo el ancho de la card */
-    border-radius: 0.5rem 0.5rem 0 0; /* esquinas redondeadas superiores opcional */
+  background-color: #f7f8fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-  footer {
-    background-color: #212529;
-    color: white;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: 50px;
-  }
-  
+.card-img-top {
+  height: 220px;
+  object-fit: cover;
+  width: 100%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.card {
+  border-radius: 0.8rem;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+footer {
+  background-color: #212529;
+  color: #fff;
+}
